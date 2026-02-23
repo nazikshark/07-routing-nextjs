@@ -27,3 +27,13 @@ export const getNoteById = async (id: string): Promise<Note> => {
   const { data } = await instance.get<Note>(`/notes/${id}`);
   return data;
 };
+
+
+export const createNote = async (note: Omit<Note, 'id' | 'createdAt'>): Promise<Note> => {
+  const { data } = await instance.post<Note>('/notes', note);
+  return data;
+};
+
+export const deleteNote = async (id: string): Promise<void> => {
+  await instance.delete(`/notes/${id}`);
+};
