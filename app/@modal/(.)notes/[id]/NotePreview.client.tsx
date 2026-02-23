@@ -5,7 +5,6 @@ import { getNoteById } from '@/lib/api';
 import { useRouter } from 'next/navigation';
 import Modal from '@/components/Modal/Modal';
 
-// Окрема назва для типу пропсів
 interface NotePreviewProps {
   id: string;
 }
@@ -28,7 +27,7 @@ export default function NotePreview({ id }: NotePreviewProps) {
       <div style={{ minWidth: '300px', minHeight: '200px', padding: '10px' }}>
         {isLoading && <p>Завантаження даних...</p>}
 
-        {/* Обробка помилки */}
+        {}
         {isError && (
           <div style={{ color: 'red', textAlign: 'center' }}>
             <p>Не вдалося завантажити деталі нотатки.</p>
@@ -36,7 +35,7 @@ export default function NotePreview({ id }: NotePreviewProps) {
           </div>
         )}
 
-        {/* Відображення деталей нотатки */}
+        {}
         {note && (
           <article>
             <h2 style={{ marginBottom: '10px' }}>{note.title}</h2>
