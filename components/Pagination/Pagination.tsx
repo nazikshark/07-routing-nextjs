@@ -6,28 +6,16 @@ interface PaginationProps {
   onPageChange: (page: number) => void;
 }
 
-export default function Pagination({ 
-  currentPage, 
-  totalPages, 
-  onPageChange 
-}: PaginationProps) {
-  const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
-
+export default function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) {
   return (
-    <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
-      {pages.map((page) => (
+    <div style={{ display: 'flex', gap: '5px', marginTop: '20px' }}>
+      {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
         <button
-          key={page}
-          onClick={() => onPageChange(page)}
-          style={{
-            padding: '8px 12px',
-            backgroundColor: currentPage === page ? '#0070f3' : '#fff',
-            color: currentPage === page ? '#fff' : '#000',
-            border: '1px solid #ccc',
-            cursor: 'pointer'
-          }}
+          key={p}
+          onClick={() => onPageChange(p)}
+          style={{ fontWeight: currentPage === p ? 'bold' : 'normal' }}
         >
-          {page}
+          {p}
         </button>
       ))}
     </div>
