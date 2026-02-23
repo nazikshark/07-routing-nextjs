@@ -1,26 +1,14 @@
-'use client';
-
-import { useRouter } from 'next/navigation';
 import Modal from '@/components/Modal/Modal';
-import NoteDetailsClient from '@/app/notes/[id]/NoteDetails.client';
+import NotePreview from './NotePreview.client'; 
 
 interface InterceptedNotePageProps {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }>;
 }
 
-export default function InterceptedNotePage({ params }: InterceptedNotePageProps) {
-  const router = useRouter();
-
-  const handleClose = () => {
-    router.back();
-  };
+export default async function InterceptedNotePage({ params }: InterceptedNotePageProps) {
+  const { id } = await params;
 
   return (
-    <Modal onClose={handleClose}>
-      {}
-      <NoteDetailsClient id={params.id} />
-    </Modal>
+    <NotePreview id={id} />
   );
 }
