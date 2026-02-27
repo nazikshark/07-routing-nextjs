@@ -1,17 +1,16 @@
 import Link from 'next/link';
 
-export default function Default() {
-  const tags = ['all', 'work', 'personal', 'ideas'];
+const TAGS = ['all', 'Todo', 'Work', 'Personal', 'Meeting', 'Shopping'];
 
+export default function SidebarDefault() {
   return (
     <nav>
-      <h3>Tags</h3>
       <ul style={{ listStyle: 'none', padding: 0 }}>
-        {tags.map((tag) => (
-          <li key={tag} style={{ marginBottom: '8px' }}>
+        {TAGS.map((tag) => (
+          <li key={tag} style={{ marginBottom: '10px' }}>
             <Link 
-              href={`/notes/filter/${tag}`}
-              style={{ textDecoration: 'none', color: 'inherit' }}
+              href={tag === 'all' ? '/notes' : `/notes/filter/${tag}`}
+              style={{ textDecoration: 'none', color: '#0070f3', fontWeight: 'bold' }}
             >
               {tag.charAt(0).toUpperCase() + tag.slice(1)}
             </Link>

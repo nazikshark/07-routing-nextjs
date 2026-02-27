@@ -3,7 +3,9 @@ import { Note } from '@/types/note';
 
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
-  headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}` }
+  headers: { 
+    Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}` 
+  }
 });
 
 export interface NotesResponse {
@@ -16,7 +18,7 @@ export const getNotes = async (page = 1, search = '', slug = ''): Promise<NotesR
     params: { 
       page, 
       search, 
-      tag: slug === 'all' ? '' : slug,
+      tag: slug === 'all' || !slug ? '' : slug,
       perPage: 6 
     }
   });
@@ -28,12 +30,12 @@ export const getNoteById = async (id: string): Promise<Note> => {
   return data;
 };
 
-
 export const createNote = async (note: Omit<Note, 'id' | 'createdAt'>): Promise<Note> => {
   const { data } = await instance.post<Note>('/notes', note);
   return data;
 };
 
-export const deleteNote = async (id: string): Promise<void> => {
-  await instance.delete(`/notes/${id}`);
+export const deleteNote = async (id: string): Promise<Note> => {
+  const { data } = await instance.delete<Note>(`/notes/${id}`);
+  return data;
 };
