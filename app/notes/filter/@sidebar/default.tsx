@@ -8,11 +8,11 @@ export default function SidebarDefault() {
       <ul style={{ listStyle: 'none', padding: 0 }}>
         {TAGS.map((tag) => (
           <li key={tag} style={{ marginBottom: '10px' }}>
-            <Link 
-              href={tag === 'all' ? '/notes' : `/notes/filter/${tag}`}
+            <Link
+              href={`/notes/filter/${tag}`}
               style={{ textDecoration: 'none', color: '#0070f3', fontWeight: 'bold' }}
             >
-              {tag.charAt(0).toUpperCase() + tag.slice(1)}
+              {tag === 'all' ? 'All notes' : tag}
             </Link>
           </li>
         ))}
