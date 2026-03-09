@@ -14,14 +14,21 @@ export interface NotesResponse {
 }
 
 export const getNotes = async (page = 1, search = '', slug = ''): Promise<NotesResponse> => {
-  const { data } = await instance.get<NotesResponse>('/notes', {
-    params: { 
-      page, 
-      search, 
-      tag: slug === 'all' || !slug ? '' : slug,
-      perPage: 6 
-    }
-  });
+  const params: Record<string, any> = {
+    page: Number(page), 
+    perPage: 6,
+    sortBy: 'created' 
+  };
+
+  if (search && search.trim()) {
+    params.search = search.trim();
+  }
+
+  if (slug && slug !== 'all') {
+    params.tag = slug;
+  }
+
+  const { data } = await instance.get<NotesResponse>('/notes', { params });
   return data;
 };
 
